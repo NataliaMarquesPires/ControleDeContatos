@@ -1,3 +1,5 @@
+@using ControleDeContatos.Models
+@model List<ContatoModel>
 @{
     ViewData["Title"] = "Listagem de Contatos";
 }
@@ -22,42 +24,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row" class="table-light">1</th>
-                <td class="table-light">Natália</td>
-                <td class="table-light">nataliamarquesrp@gmail.com</td>
-                <td class="table-light">(17) 99656-4632</td>
-                <td class="table-light">
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <a role="button" class="btn btn-outline-primary" asp-controller="Contato" asp-action="Editar">Editar</a>
-                        <a role="button" class="btn btn-outline-danger" asp-controller="Contato" asp-action="ApagarConfirmacao">Apagar</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row" class="table-light">2</th>
-                <td class="table-light">Adilson</td>
-                <td class="table-light">adilsonpire@gmail.com</td>
-                <td class="table-light">(17) 99277-1440</td>
-                <td class="table-light">
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <a role="button" class="btn btn-outline-primary" asp-controller="Contato" asp-action="Editar">Editar</a>
-                        <a role="button" class="btn btn-outline-danger" asp-controller="Contato" asp-action="ApagarConfirmacao">Apagar</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row" class="table-light">3</th>
-                <td class="table-light">Adriana</td>
-                <td class="table-light">adrianamarques37@gmail.com</td>
-                <td class="table-light">(17) 99634-2984</td>
-                <td class="table-light">
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <a role="button" class="btn btn-outline-primary" asp-controller="Contato" asp-action="Editar">Editar</a>
-                        <a role="button" class="btn btn-outline-danger" asp-controller="Contato" asp-action="ApagarConfirmacao">Apagar</a>
-                    </div>
-                </td>
-            </tr>
+            @if(Model != null && Model.Any())
+            {
+                foreach(ContatoModel contato in Model){
+                    <tr>
+                        <th scope="row" class="table-light">@contato.Id</th>
+                        <td class="table-light">@contato.Nome</td>
+                        <td class="table-light">@contato.Email</td>
+                        <td class="table-light">@contato.Celular</td>
+                        <td class="table-light">
+                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                <a role="button" class="btn btn-outline-primary" asp-route-id="@contato.Id" asp-controller="Contato" asp-action="Editar">Editar</a>
+                                <a role="button" class="btn btn-outline-danger" asp-route-id="@contato.Id" asp-controller="Contato" asp-action="ApagarConfirmacao">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
         </tbody>
     </table>
 
