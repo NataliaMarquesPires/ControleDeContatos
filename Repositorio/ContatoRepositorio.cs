@@ -60,5 +60,23 @@ namespace ControleDeContatos.Repositorio {
 
             return contatoDB;
         }
+
+        /// <summary>
+        /// Metodo para apagar um contato no banco.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public bool Apagar(int id) {
+            ContatoModel contatoDB = ListarPorId(id);
+
+            if (contatoDB == null)
+                throw new Exception("Contato não encontrado");
+
+            _context.Contatos.Remove(contatoDB);
+            _context.SaveChanges();
+
+            return true;
+        }
     }
 }
